@@ -38,9 +38,19 @@ export class Card extends React.Component<CardProps, CardState> {
             );
         }
 
+        let sideColor:React.CSSProperties = {
+            position: 'absolute',
+            zIndex: -1,
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 7,
+            backgroundColor: this.props.card.color
+        };
+
         return (
             <div className="card">
-
+                <div style={sideColor} />
                 <div 
                     className={
                         this.state.showDetails? 
