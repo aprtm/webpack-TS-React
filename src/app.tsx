@@ -5,6 +5,7 @@ import { KanbanBoard } from '../components/kanban-board';
 import { Search } from '../components/searchbox';
 import { RandomWords } from '../components/textarea';
 import { Selection } from '../components/selectoption';
+import { NoControl } from '../components/uncontrolled';
 
 import greeting from "./abc_module";
 //import {Reactivity} from "./xyz_module";
@@ -58,6 +59,8 @@ ReactDOM.render(
       <RandomWords />
       <h4>SELECT-OPTION</h4>
       <Selection />
+      <h4>UNCONTROLLED COMPONENT</h4>
+      <NoControl />
     </div>,
     document.getElementById('root')
 );
