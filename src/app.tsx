@@ -3,6 +3,8 @@ import * as ReactDOM from 'react-dom';
 
 import { KanbanBoard } from '../components/kanban-board';
 import { Search } from '../components/searchbox';
+import { RandomWords } from '../components/textarea';
+import { Selection } from '../components/selectoption';
 
 import greeting from "./abc_module";
 //import {Reactivity} from "./xyz_module";
@@ -46,9 +48,16 @@ let cardsList = [
 
 ReactDOM.render(
     <div>
+      <h4>KANBAN APP</h4>
       <KanbanBoard cards={cardsList} />
       <hr />
+      <h4>SEARCH BOX</h4>
       <Search />
+      <hr />
+      <h4>TEXTAREA PRINT</h4>
+      <RandomWords />
+      <h4>SELECT-OPTION</h4>
+      <Selection />
     </div>,
     document.getElementById('root')
 );
