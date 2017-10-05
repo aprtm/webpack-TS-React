@@ -6,6 +6,7 @@ import { Search } from '../components/searchbox';
 import { RandomWords } from '../components/textarea';
 import { Selection } from '../components/selectoption';
 import { NoControl } from '../components/uncontrolled';
+import { FocusText } from '../components/refstest';
 
 import greeting from "./abc_module";
 //import {Reactivity} from "./xyz_module";
@@ -61,6 +62,8 @@ ReactDOM.render(
       <Selection />
       <h4>UNCONTROLLED COMPONENT</h4>
       <NoControl />
+      <h4>REFS TEST</h4>
+      <FocusText />
     </div>,
     document.getElementById('root')
 );
