@@ -9,9 +9,9 @@ interface CheckListProps {
 export class CheckList extends React.Component<CheckListProps> {
     
     render() {
-        let tasks = this.props.tasks.map( (task: Task, index: number) => {
+        let tasks = this.props.tasks.map( (task: Task) => {
             return (
-                <li key={index} className="checklist-task">
+                <li key={task.id} className="checklist-task">
                     <input type="checkbox" defaultChecked={task.done} />
                     {task.name}
                     <a href="#" className="checklist_task--remove" />
@@ -22,6 +22,11 @@ export class CheckList extends React.Component<CheckListProps> {
         return (
             <div className="checklist">
                 <ul>{tasks}</ul>
+                <input
+                    type="text"
+                    className="checklist--add-task"
+                    placeholder="Type then hit Enter to add a task"
+                />
             </div>
         );
     }
