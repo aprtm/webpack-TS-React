@@ -58,12 +58,16 @@ ReactDOM.render(
       <hr />
       <h4>TEXTAREA PRINT</h4>
       <RandomWords />
+      <hr />
       <h4>SELECT-OPTION</h4>
       <Selection />
+      <hr />
       <h4>UNCONTROLLED COMPONENT</h4>
       <NoControl />
+      <hr />
       <h4>REFS TEST</h4>
       <FocusText />
+      <hr />
     </div>,
     document.getElementById('root')
 );
