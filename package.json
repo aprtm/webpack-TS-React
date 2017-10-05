@@ -1,5 +1,6 @@
 {
   "name": "learn-react",
+  "liscence": "to kill",
   "scripts": {
     "build": "webpack"
   },

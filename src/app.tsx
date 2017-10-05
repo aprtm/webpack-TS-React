@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { KanbanBoard } from '../components/kanban-board';
+import { Search } from '../components/searchbox';
 
 import greeting from "./abc_module";
 //import {Reactivity} from "./xyz_module";
@@ -44,6 +45,10 @@ let cardsList = [
 ];
 
 ReactDOM.render(
-    <KanbanBoard cards={cardsList} />,
+    <div>
+      <KanbanBoard cards={cardsList} />
+      <hr />
+      <Search />
+    </div>,
     document.getElementById('root')
 );
