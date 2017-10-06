@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { KanbanBoard } from '../components/kanban-board';
-import { Search } from '../components/searchbox';
-import { RandomWords } from '../components/textarea';
-import { Selection } from '../components/selectoption';
-import { NoControl } from '../components/uncontrolled';
-import { FocusText } from '../components/refstest';
+import { KanbanBoard } from './components/kanban-board';
+import { Search } from './components/searchbox';
+import { RandomWords } from './components/textarea';
+import { Selection } from './components/selectoption';
+import { NoControl } from './components/uncontrolled';
+import { FocusText } from './components/refstest';
 
 import greeting from "./abc_module";
 //import {Reactivity} from "./xyz_module";

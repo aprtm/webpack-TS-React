@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Task } from '../typings/custom';
+import { Task } from '../../typings/custom';
 
 interface CheckListProps {
     cardId: number;

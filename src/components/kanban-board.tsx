@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { List } from './list';
 
-import { Card as CardType } from '../typings/custom';
+import { Card as CardType } from '../../typings/custom';
 
 interface KanbanBoardProps {
     cards: CardType[];

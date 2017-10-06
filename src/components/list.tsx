@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Card } from './card';
 
-import { Card as CardType } from '../typings/custom';
+import { Card as CardType } from '../../typings/custom';
 
 interface ListProps {
     id: string;

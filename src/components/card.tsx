@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CheckList } from './checklist';
 
-import { Card as CardType } from '../typings/custom';
+import { Card as CardType } from '../../typings/custom';
 
 interface CardProps {
     card: CardType;
