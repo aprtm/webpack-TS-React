@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { CheckList } from './checklist';
 
-import { Card as CardType } from '../../typings/custom';
+import { Card as CardType, TaskCallbacks } from '../../typings/custom';
 
 interface CardProps {
     card: CardType;
+    taskCallbacks:TaskCallbacks
 }
 interface CardState {
     showDetails: boolean;
@@ -33,6 +34,7 @@ export class Card extends React.Component<CardProps, CardState> {
                     <CheckList
                         cardId={this.props.card.id}
                         tasks={this.props.card.tasks}
+                        taskCallbacks={this.props.taskCallbacks}
                     />
                 </div>
             );

@@ -12,7 +12,12 @@
     "webpack": "^3.6.0"
   },
   "dependencies": {
+    "@types/immutability-helper": "^2.0.15",
+    "@types/react-addons-update": "^0.14.18",
+    "babel-polyfill": "^6.26.0",
+    "immutability-helper": "^2.4.0",
     "react": "^16.0.0",
+    "react-addons-update": "^15.6.2",
     "react-dom": "^16.0.0"
   }
 }

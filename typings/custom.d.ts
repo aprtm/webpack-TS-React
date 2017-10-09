@@ -12,3 +12,9 @@ export interface Card {
     status:string;
     tasks:Task[];
 }
+
+export interface TaskCallbacks{
+    toggle:()=>{},
+    delete:()=>{},
+    add:(cardId:number,task:string)=>{}
+}
