@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Route } from 'react-router-dom'
 import * as update from 'immutability-helper';
+
 import { throttle } from '../utils/functions'
 import KanbanBoard from './kanban-board';
 
@@ -19,7 +21,7 @@ interface KanbanBoardContainerState{
 //   // 'Authorization': 'meh'
 // }
 
-export class KanbanBoardContainer extends React.Component <KanbanBoardContainerProps,KanbanBoardContainerState> {
+class KanbanBoardContainer extends React.Component <KanbanBoardContainerProps,KanbanBoardContainerState> {
     constructor(){
         super();
         this.state ={
@@ -37,6 +39,87 @@ export class KanbanBoardContainer extends React.Component <KanbanBoardContainerP
             .then( (res)=>res.json() )
             .then( (data)=>this.setState({cards:data}) )
             .catch( console.error );
+    }
+
+    addCard( card:CardType ){
+        // Keep a reference to the original state prior to the mutations
+        // in case we need to revert the optimistic changes in the UI
+        let prevState = this.state;
+
+        // Add a temporary ID to the card
+        if( card.id===null ){
+            card = Object.assign({}, card, {id:Date.now()});
+        }
+
+        // Create a new object and push the new card to the array of cards
+        let nextState = update(this.state.cards, { $push: [card] });
+
+        // set the component state to the mutated object
+        this.setState({cards:nextState})
+
+        // Call the API to add the card on the server
+        fetch(`${this.props.apiUrl}/cards`, {
+            method: 'post',
+            headers: this.props.apiHeaders,
+            body: JSON.stringify(card)
+        })
+            .then( (res)=>{
+                if( res.ok ){
+                    return res.json()
+                }else{
+                    // Throw an error if server response wasn't 'ok'
+                    // so we can revert back the optimistic changes
+                    // made to the UI.
+                    throw new Error("Server response was not OK")
+                }
+            })
+            .then( (data)=>{
+                // When the server returns the definitive ID
+                // used for the new Card on the server, update it on React
+                card.id = data.id;
+                this.setState({
+                    cards:nextState
+                });
+            } )
+            .catch( ()=> this.setState(prevState) );
+
+    }
+
+    updateCard( card:CardType ){
+        // Keep a reference to the original state prior to the mutations
+        // in case we need to revert the optimistic changes in the UI
+        let prevState = this.state;
+
+        // Find the index of the card
+        let cardIndex = this.state.cards.findIndex( (iCard)=>iCard.id == card.id );
+
+        // Using the $set command, we will change the whole card
+        let nextState = update(
+            this.state.cards, {
+                [cardIndex]: { $set: card }
+            }
+        );
+        // set the component state to the mutated object
+        this.setState({ cards: nextState });
+
+        // Call the API to update the card on the server
+        fetch(`${this.props.apiUrl}/cards/${card.id}`, {
+            method: 'put',
+            headers: this.props.apiHeaders,
+            body: JSON.stringify(card)
+        })
+            .then( (res)=>{
+                if( !res.ok ){
+                    // Throw an error if server response wasn't 'ok'
+                    // so we can revert back the optimistic changes
+                    // made to the UI.
+                    throw new Error('Server response was not OK')
+                }
+            } )
+            .catch( (err)=>{
+                console.log('Fetch Error:', err);
+                this.setState(prevState);
+            } );
     }
 
     addTask(cardId:number, taskName:string){
@@ -248,21 +331,26 @@ export class KanbanBoardContainer extends React.Component <KanbanBoardContainerP
 
     render(){
         return (
-            <KanbanBoard
-                cards={this.state.cards}
-                taskCallbacks={ 
-                    {
-                        toggle: this.toggleTask.bind(this),
-                        delete: this.deleteTask.bind(this),
-                        add: this.addTask.bind(this )
-                    }
-                }
-                cardCallbacks={{
-                    updateStatus: this.updateCardStatus,
-                    updatePosition: this.updateCardPosition,
-                    persistCardDrag: this.persistCardDrag.bind(this)
-                }}
-            />
+            <Route render={()=>{
+                return <KanbanBoard
+                        cards={this.state.cards}
+                        taskCallbacks={ 
+                            {
+                                toggle: this.toggleTask.bind(this),
+                                delete: this.deleteTask.bind(this),
+                                add: this.addTask.bind(this )
+                            }
+                        }
+                        cardCallbacks={{
+                            addCard: this.addCard.bind(this),
+                            updateCard: this.updateCard.bind(this),
+                            updateStatus: this.updateCardStatus,
+                            updatePosition: this.updateCardPosition,
+                            persistCardDrag: this.persistCardDrag.bind(this)
+                        }}
+                    />
+            }}/>
         );
     }
 }
+export default KanbanBoardContainer

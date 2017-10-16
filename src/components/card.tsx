@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CheckList } from './checklist';
-
+import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import constants from '../utils/constants';
 // import marked from 'marked'; 
@@ -94,6 +94,7 @@ class Card extends React.Component<CardProps&InjectedCardProps, CardState> {
         return connectDropTarget(connectDragSource(
             <div className="card">
                 <div style={sideColor} />
+                <div className="card_edit"><Link to={'/edit/'+this.props.card.id}>&#9998;</Link></div>
                 <div 
                     className={
                         this.state.showDetails? 

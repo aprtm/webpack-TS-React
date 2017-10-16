@@ -20,7 +20,13 @@ export interface TaskCallbacks{
 }
 
 export interface CardCallbacks{
-    updateStatus: Function
-    updatePosition: Function
-    persistCardDrag: Function
+    addCard: Function,
+    updateCard: Function,
+    updateStatus: Function;
+    updatePosition: Function;
+    persistCardDrag: Function;
+}
+
+export interface RouterMatchProps{
+    card_id:number
 }

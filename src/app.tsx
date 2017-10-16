@@ -1,13 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Router } from 'react-router';
+import { Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 // import { KanbanBoard } from './components/kanban-board';
-import { KanbanBoardContainer } from './components/kanban-board-container';
-import { Search } from './components/searchbox';
-import { RandomWords } from './components/textarea';
-import { Selection } from './components/selectoption';
-import { NoControl } from './components/uncontrolled';
-import { FocusText } from './components/refstest';
+import KanbanBoardContainer from './components/kanban-board-container';
+
+// import { Search } from './components/searchbox';
+// import { RandomWords } from './components/textarea';
+// import { Selection } from './components/selectoption';
+// import { NoControl } from './components/uncontrolled';
+// import { FocusText } from './components/refstest';
 
 // import greeting from "./abc_module";
 // import {Reactivity} from "./xyz_module";
@@ -57,9 +61,19 @@ const API_HEADERS = {
 */
 
 ReactDOM.render(
-    <div>
+    <Router history={createBrowserHistory()}>
+      <Route render={()=>{
+        return <KanbanBoardContainer apiUrl={API_URL} apiHeaders={API_HEADERS} />
+      }} />
+    </Router>,
+    document.getElementById('root')
+);
+
+
+/*
+<div>
       <h4>KANBAN APP</h4>
-      {/* <KanbanBoard apiUrl={API_URL} apiHeaders={API_HEADERS}/> */}
+      {<KanbanBoard apiUrl={API_URL} apiHeaders={API_HEADERS}/>}
       <KanbanBoardContainer apiUrl={API_URL} apiHeaders={API_HEADERS}/>
       <hr />
       <h4>SEARCH BOX</h4>
@@ -77,6 +91,6 @@ ReactDOM.render(
       <h4>REFS TEST</h4>
       <FocusText />
       <hr />
-    </div>,
-    document.getElementById('root')
-);
+    </div>
+
+    */
