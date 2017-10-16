@@ -134,6 +134,9 @@ ul {
     outline: dashed thin #999;
     outline-offset: 2px;
 }
+.card.big{
+    white-space: normal;
+}
 .card.big label {
     margin: 3px 0 7px 3px;
     color: #a7a7a7;
