@@ -3,7 +3,7 @@ import * as React from 'react';
 
 
 export class FocusText extends React.Component{
-    handleClick(){
+    handleClick = ()=>{
         //Explicitly focus the text input using the raw DOM API
         (this.refs.myTextInput as HTMLInputElement).focus();
     }
@@ -17,9 +17,11 @@ export class FocusText extends React.Component{
                 <input
                     type="button"
                     value="Focus the text input"
-                    onClick={this.handleClick.bind(this)}
+                    onClick={this.handleClick}
                 />
             </div>
         )
     }
 }
+
+/* onClick={this.handleClick.bind(this)} */
